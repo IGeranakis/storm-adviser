@@ -230,6 +230,8 @@ function App() {
 
                     <th>File Path</th>
                     <th>Occurencies</th>
+                    <th>Keywords</th>
+                    
                     
 
                 </tr>
@@ -240,6 +242,7 @@ function App() {
                         <td>{index+1}</td>
                         <td>{regular[0]}</td>
                         <td>{regular[1]}</td>
+                        <td>{regular[2]}</td>
                         {console.log(regular[0])}
                         {console.log(regular[1])}
                     </tr>

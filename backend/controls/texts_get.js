@@ -48,19 +48,26 @@ const GetTextByKeyword = async(req,res) =>
             // Initialize total occurrences
             let totalOccurrences = 0;
             
+            let foundKeywords = [];
             // Iterate over keywordList to calculate total occurrences
             keywordList.forEach((keyword, index) => {
                 const occurrences = row[`occurrences_${index}`];
                 totalOccurrences += occurrences; // Add occurrences to total
+                if (occurrences > 0) {
+                    foundKeywords.push(keyword);
+                    foundKeywords.push(" ");
+                }
             });
-            Occurences.push([`File Path: ${filePath}`, `Occurences: ${totalOccurrences}`])
+            console.log(foundKeywords)
+            Occurences.push([`File Path: ${filePath}`, `Occurences: ${totalOccurrences}`, foundKeywords])
             
+           
             // Print file path and total occurrences
             //console.log(`File Path: ${filePath}, Occurrences: ${totalOccurrences}`);
         });
-        //console.log(Occurences)
         return res.json(Occurences);
     });
+
     
 }
 
