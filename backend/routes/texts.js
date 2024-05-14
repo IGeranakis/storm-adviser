@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/:keyword', GetTextByKeyword);
 router.get("/Get/:keyword", GetText);
-router.get("/Content/:keyword", GetContent)
+router.get("/content23/:keyword", GetContent)
 
 module.exports = router;
