@@ -1,6 +1,8 @@
 import {React, useEffect, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import './MyContent.css'; // Import the CSS file
+
 function MyContent({ variables }) {
   // Access the variable from the URL parameters
   //const { variable, variable2 } = useParams();
@@ -21,9 +23,9 @@ function MyContent({ variables }) {
 
   return (
       
-    <div>
-      <h1>Title: {variable2}</h1>
-      <p>{variable}</p>
+    <div className="container">
+      <h4 className="title">Title: {variable2}</h4>
+      <p className="content" style={{ maxHeight: '800px', overflowY: 'scroll' }}><pre>{variable}</pre></p>
     </div>
   );
 }

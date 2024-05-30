@@ -22,11 +22,22 @@ function MainPage({ setVariables }) {
     //setVariables({ variable, variable2});
     localStorage.setItem('variable', variable);
     localStorage.setItem('variable2', variable2);
-    console.log("HSFAJFAFSASFLK");
+    //console.log("HSFAJFAFSASFLK");
     //navigate(`/content`);
     //window.open(`/content`, "_blank");
     window.open('/content', '_blank');
   };
+
+  const handleOriginalContent = (variable1) => {
+    
+    let substring = variable1.substring(11)
+    let substring1 = encodeURIComponent(substring)
+    //localStorage.setItem('pdfUrl', substring);
+    console.log(substring)
+    // substring1 = substring1.replace('localhost:5173', ' ');
+    //substring1 = substring1.replace(/^https?:\/\/[^/]+/, '');
+    navigate(`/file://${substring}`);
+  }
   
 
   // const [messages, setMessages] = useState([
@@ -250,6 +261,8 @@ function MainPage({ setVariables }) {
                     <th>File Path</th>
                     <th>Occurencies</th>
                     <th>Keywords</th>
+                    <th>Show Content</th>
+                    <th>Original Content</th>
                     
 
                 </tr>
@@ -266,6 +279,7 @@ function MainPage({ setVariables }) {
                             Content
                           </button>
                         </td>
+                        <td><button onClick={() => handleOriginalContent(regular[0])}>View Original Content</button></td>
                         {console.log(regular[0])}
                         {console.log(regular[1])}
                     </tr>
