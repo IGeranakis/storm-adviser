@@ -20,7 +20,7 @@ const GetTextByKeyword = async(req,res) =>
     //console.log(keywordList);
     // Construct the SQL query dynamically based on keywordList
     let sql = `
-    SELECT file_Paths,
+    SELECT primal_content, file_Paths,
            ${keywordList.map((kw, index) => `
                SUM(CASE WHEN keywords LIKE CONCAT('%', ?, '%') THEN 1 ELSE 0 END) AS occurrences_${index}
            `).join(', ')}
@@ -44,16 +44,21 @@ const GetTextByKeyword = async(req,res) =>
         results.forEach(row => {
             // Access the file path
             const filePath = row.file_Paths;
-            
+            const primal_content = row.primal_content;
             // Initialize total occurrences
             let totalOccurrences = 0;
-            
+            let foundKeywords = [];
             // Iterate over keywordList to calculate total occurrences
             keywordList.forEach((keyword, index) => {
                 const occurrences = row[`occurrences_${index}`];
                 totalOccurrences += occurrences; // Add occurrences to total
+                if (occurrences > 0) {
+                    foundKeywords.push(keyword);
+                    foundKeywords.push(" ");
+                }
             });
-            Occurences.push([`File Path: ${filePath}`, `Occurences: ${totalOccurrences}`])
+            console.log(foundKeywords);
+            Occurences.push([`File Path: ${filePath}`, `Occurences: ${totalOccurrences}`, `${primal_content}`, foundKeywords])
             
             // Print file path and total occurrences
             //console.log(`File Path: ${filePath}, Occurrences: ${totalOccurrences}`);
@@ -90,4 +95,4 @@ const GetContent = async(req, res) =>
         res.json(results);
     });
 }
-module.exports = {GetTextByKeyword,GetText, GetContent, GetContent};
+module.exports = {GetTextByKeyword,GetText, GetContent};
